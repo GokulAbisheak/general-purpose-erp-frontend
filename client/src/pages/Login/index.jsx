@@ -6,7 +6,7 @@ const Login = () => {
         <>
             <div className='flex min-h-screen justify-center items-center'>
                 <div className='flex shadow-[0_0_10px_rgba(0,0,0,0.5)] h-[400px] md:h-[500px]'>
-                    <div className='bg-purple-700 w-[300px] h-full hidden md:block'>
+                    <div className='bg-purple-700 w-[300px] h-full hidden md:block relative'>
 
                     </div>
                     <div className='w-[400px] h-full flex items-center justify-center'>
