@@ -22,13 +22,13 @@ const FrontendRoutes = () => {
           <Route element={<UserLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>
           <Route element={<AdminLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/business" element={<BusinessManagement />} />
             <Route path="/customer" element={<CustomerManagement />} />
             <Route path="/employee" element={<EmployeeManagement />} />
