@@ -8,10 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SideNav = (isMobileOpen) => {
   const navigate = useNavigate();
+  const location = useLocation().pathname;
 
   const sideNavLinks = [
     {
@@ -65,7 +66,7 @@ const SideNav = (isMobileOpen) => {
               key={item.link}
               className={`w-full py-[15px] px-[20px] text-white text-left flex items-center hover:bg-[rgba(0,0,0,0.3)] duration-100 ${
                 item.text === "Settings" ? "absolute bottom-0" : ""
-              }`}
+              } ${location == item.link ? ' bg-[rgba(0,0,0,0.3)]' : ''}`}
               onClick={() => {
                 navigate(item.link);
               }}
