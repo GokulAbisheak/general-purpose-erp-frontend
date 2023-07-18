@@ -12,7 +12,7 @@ const AdminLayout = () => {
         <SideNav state={isMobileOpen} />
         <div className="flex flex-col w-full">
           <AdminHeader isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
-          <div className="p-[20px]">
+          <div className="p-[20px] overflow-scroll">
             <Outlet />
           </div>
         </div>
