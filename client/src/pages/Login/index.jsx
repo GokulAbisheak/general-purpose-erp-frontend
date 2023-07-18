@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import LoginImage from '../../assets/login_image.png'
 
 const Login = () => {
     return (
         <>
             <div className='flex min-h-screen justify-center items-center'>
-                <div className='flex shadow-[0_0_10px_rgba(0,0,0,0.5)] h-[400px] md:h-[500px]'>
-                    <div className='bg-purple-700 w-[300px] h-full hidden md:block relative'>
-
+                <div className='flex shadow-none md:shadow-[0_0_10px_rgba(0,0,0,0.5)] h-[400px] md:h-[500px]'>
+                    <div className='bg-purple-700 w-[300px] h-full hidden md:block relative p-[15px]'>
+                    <img className='absolute bottom-[20px] w-[90%]' src={LoginImage} />
                     </div>
                     <div className='w-[400px] h-full flex items-center justify-center'>
                         <div className='justify-center items-center w-full px-[50px]'>
