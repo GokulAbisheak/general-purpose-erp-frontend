@@ -14,8 +14,6 @@ const AddEmployee = () => {
 
   const navigate = useNavigate();
 
-  console.log(useLocation().pathname.split('/'))
-
   const handleSubmit = (e) => {
     e.preventDefault();
 

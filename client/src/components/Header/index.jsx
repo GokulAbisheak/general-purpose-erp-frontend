@@ -11,8 +11,6 @@ const Header = () => {
     JSON.parse(localStorage.getItem("loggedBusiness"))
   );
 
-  console.log(business);
-
   const navigation = [
     {
       text: "Home",
