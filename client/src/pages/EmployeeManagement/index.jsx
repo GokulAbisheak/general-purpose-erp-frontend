@@ -1,84 +1,40 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const EmployeeManagement = () => {
   const navigate = useNavigate();
   const headerContent = ["Employee ID", "Name", "Type", "NIC", "Contact", ""];
-  const sampleData = [
-    {
-      EmployeeID: 1,
-      Name: "John Doe",
-      Type: "Full-time",
-      NIC: "1234567890",
-      Contact: "123-456-7890",
-    },
-    {
-      EmployeeID: 2,
-      Name: "Jane Smith",
-      Type: "Part-time",
-      NIC: "0987654321",
-      Contact: "987-654-3210",
-    },
-    {
-      EmployeeID: 3,
-      Name: "Alice Johnson",
-      Type: "Contractor",
-      NIC: "2468135790",
-      Contact: "456-789-1234",
-    },
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
 
-    {
-      EmployeeID: 4,
-      Name: "Bob Williams",
-      Type: "Full-time",
-      NIC: "1357924680",
-      Contact: "789-123-4567",
-    },
-    {
-      EmployeeID: 5,
-      Name: "Sarah Davis",
-      Type: "Part-time",
-      NIC: "5678901234",
-      Contact: "321-654-9870",
-    },
-    {
-      EmployeeID: 6,
-      Name: "Michael Brown",
-      Type: "Full-time",
-      NIC: "7890123456",
-      Contact: "654-987-3210",
-    },
-    {
-      EmployeeID: 7,
-      Name: "Emily Johnson",
-      Type: "Contractor",
-      NIC: "9081726354",
-      Contact: "987-321-6540",
-    },
-    {
-      EmployeeID: 8,
-      Name: "David Wilson",
-      Type: "Part-time",
-      NIC: "5432167890",
-      Contact: "123-987-4560",
-    },
-    {
-      EmployeeID: 9,
-      Name: "Olivia Martin",
-      Type: "Full-time",
-      NIC: "7654321098",
-      Contact: "321-789-6540",
-    },
-    {
-      EmployeeID: 10,
-      Name: "Daniel Thompson",
-      Type: "Contractor",
-      NIC: "4321098765",
-      Contact: "654-321-9870",
-    },
-  ];
+  const [employees, setEmployees] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_SERVER_URL}/employee/get/business/${
+          business._id
+        }`
+      )
+      .then((res) => {
+        setEmployees(res.data);
+      });
+  });
+
+  const deleteEmployee = (id) => {
+    if (!confirm("Are you sure you want to delete?")) {
+      return;
+    }
+
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/employee/delete/${id}`)
+      .then((res) => {})
+      .catch(() => {});
+  };
 
   return (
     <>
@@ -97,8 +53,8 @@ const EmployeeManagement = () => {
               )}
             </div>
           </div>
-          {sampleData && sampleData.length > 0 ? (
-            sampleData.map((item, index) => (
+          {employees && employees.length > 0 ? (
+            employees.map((item, index) => (
               <div
                 key={index}
                 className={`table-row-group ${
@@ -106,17 +62,17 @@ const EmployeeManagement = () => {
                 }`}
               >
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.EmployeeID}
+                  {item.employeeId}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Name}
+                  {item.name}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Type}
+                  {item.employeeType}
                 </div>
-                <div className="table-cell py-[10px] px-[20px]">{item.NIC}</div>
+                <div className="table-cell py-[10px] px-[20px]">{item.nic}</div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Contact}
+                  {item.phoneNumber}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
                   <button
@@ -127,7 +83,12 @@ const EmployeeManagement = () => {
                   >
                     Update
                   </button>
-                  <button className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]">
+                  <button
+                    className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]"
+                    onClick={() => {
+                      deleteEmployee(item._id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>

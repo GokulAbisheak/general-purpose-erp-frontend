@@ -1,63 +1,41 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const InventoryManagement = () => {
   const navigate = useNavigate();
   const headerContent = ["Name", "Quantity", "Category", ""];
-  const sampleData = [
-    {
-      Name: "Product A",
-      Quantity: 5,
-      Category: "Electronics",
-    },
-    {
-      Name: "Product B",
-      Quantity: 10,
-      Category: "Clothing",
-    },
-    {
-      Name: "Product C",
-      Quantity: 2,
-      Category: "Home Decor",
-    },
-    {
-      Name: "Product D",
-      Quantity: 8,
-      Category: "Electronics",
-    },
-    {
-      Name: "Product E",
-      Quantity: 3,
-      Category: "Clothing",
-    },
-    {
-      Name: "Product F",
-      Quantity: 12,
-      Category: "Home Decor",
-    },
-    {
-      Name: "Product G",
-      Quantity: 6,
-      Category: "Electronics",
-    },
-    {
-      Name: "Product H",
-      Quantity: 4,
-      Category: "Clothing",
-    },
-    {
-      Name: "Product I",
-      Quantity: 9,
-      Category: "Home Decor",
-    },
-    {
-      Name: "Product J",
-      Quantity: 7,
-      Category: "Electronics",
-    },
-  ];
+
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
+
+  const [inventories, setInventories] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_SERVER_URL}/inventory/get/business/${
+          business._id
+        }`
+      )
+      .then((res) => {
+        setInventories(res.data);
+      });
+  });
+
+  const deleteInventory = (id) => {
+    if (!confirm("Are you sure you want to delete?")) {
+      return;
+    }
+
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/inventory/delete/${id}`)
+      .then((res) => {})
+      .catch(() => {});
+  };
 
   return (
     <>
@@ -76,8 +54,8 @@ const InventoryManagement = () => {
               )}
             </div>
           </div>
-          {sampleData && sampleData.length > 0 ? (
-            sampleData.map((item, index) => (
+          {inventories && inventories.length > 0 ? (
+            inventories.map((item, index) => (
               <div
                 key={index}
                 className={`table-row-group ${
@@ -85,13 +63,13 @@ const InventoryManagement = () => {
                 }`}
               >
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Name}
+                  {item.name}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Quantity}
+                  {item.quantity}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Category}
+                  {item.category}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
                   <button
@@ -102,7 +80,12 @@ const InventoryManagement = () => {
                   >
                     Update
                   </button>
-                  <button className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]">
+                  <button
+                    className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]"
+                    onClick={() => {
+                      deleteInventory(item._id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>

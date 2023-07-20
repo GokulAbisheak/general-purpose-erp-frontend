@@ -21,6 +21,7 @@ import UpdateCustomer from "../pages/CustomerManagment/update";
 import UpdateEmployee from "../pages/EmployeeManagement/update";
 import UpdateFinance from "../pages/FinanceManagement/update";
 import UpdateInventory from "../pages/InventoryManagement/update";
+import Logout from "../components/Logout";
 
 const FrontendRoutes = () => {
   return (
@@ -51,6 +52,7 @@ const FrontendRoutes = () => {
             <Route path="/finance/update" element={<UpdateFinance />} />
             <Route path="/inventory/update" element={<UpdateInventory />} />
           </Route>
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </Router>
     </>

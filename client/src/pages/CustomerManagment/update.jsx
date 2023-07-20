@@ -1,14 +1,34 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UpdateCustomer = () => {
+  const state = useLocation().state;
+  const [name, setName] = useState(state.item.name);
+  const [email, setEmail] = useState(state.item.email);
+  const [contact, setContact] = useState(state.item.phone);
+  const [address, setAddress] = useState(state.item.address);
 
-    const state = useLocation().state;
+  const navigate = useNavigate();
 
-    const [name, setName] = useState(state.item.Name)
-    const [email, setEmail] = useState(state.item.Email)
-    const [contact, setContact] = useState(state.item.Contact)
-    const [address, setAddress] = useState(state.item.Address)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const customer = {
+      name: name,
+      email: email,
+      phone: contact,
+      address: address,
+    };
+
+    axios
+      .patch(
+        `${import.meta.env.VITE_SERVER_URL}/customer/update/${state.item._id}`,
+        customer
+      )
+      .then((res) => { navigate('/customer') })
+      .catch((error) => { alert('Error Updating') });
+  };
 
   return (
     <>
@@ -19,31 +39,43 @@ const UpdateCustomer = () => {
               <div className="justify-center text-center items-center text-purple-700 font-bold text-2xl mb-[20px]">
                 Update Customer
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-[10px]">
                   <input
                     type="text"
                     placeholder="Name"
                     value={name}
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Email"
                     value={email}
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Contact Number"
                     value={contact}
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Address"
                     value={address}
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
                   ></input>
                   <button
                     type="submit"
