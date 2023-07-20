@@ -12,7 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SideNav = (isMobileOpen) => {
   const navigate = useNavigate();
-  const location = useLocation().pathname;
+  const location = `/${(useLocation().pathname.split('/'))[1]}`
 
   const sideNavLinks = [
     {

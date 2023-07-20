@@ -1,6 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddInventory = () => {
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [category, setCategory] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const finance = {
+      business: business._id,
+      name: name,
+      quantity: quantity,
+      category: category,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/inventory/add`, finance)
+      .then((res) => {
+        navigate("/inventory");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
   return (
     <>
       <div className="flex w-full h-full justify-center items-center">
@@ -10,22 +41,31 @@ const AddInventory = () => {
               <div className="justify-center text-center items-center text-purple-700 font-bold text-2xl mb-[20px]">
                 Add Item
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-[10px]">
                   <input
                     type="text"
                     placeholder="Name"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="number"
                     placeholder="Quantity"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setQuantity(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Category"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                    }}
                   ></input>
                   <button
                     type="submit"

@@ -1,73 +1,41 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const CustomerManagement = () => {
   const navigate = useNavigate();
   const headerContent = ["Name", "Email", "Contact", "Address", ""];
-  const sampleData = [
-    {
-      Name: "John Doe",
-      Email: "johndoe@example.com",
-      Contact: "123-456-7890",
-      Address: "123 Main St, City, Country",
-    },
-    {
-      Name: "Jane Smith",
-      Email: "janesmith@example.com",
-      Contact: "987-654-3210",
-      Address: "456 Elm St, City, Country",
-    },
-    {
-      Name: "Alice Johnson",
-      Email: "alicejohnson@example.com",
-      Contact: "456-789-1234",
-      Address: "789 Oak St, City, Country",
-    },
-    {
-      Name: "Bob Williams",
-      Email: "bobwilliams@example.com",
-      Contact: "789-123-4567",
-      Address: "567 Pine St, City, Country",
-    },
-    {
-      Name: "Sarah Davis",
-      Email: "sarahdavis@example.com",
-      Contact: "321-654-9870",
-      Address: "890 Cedar St, City, Country",
-    },
-    {
-      Name: "Michael Brown",
-      Email: "michaelbrown@example.com",
-      Contact: "654-987-3210",
-      Address: "123 Maple St, City, Country",
-    },
-    {
-      Name: "Emily Johnson",
-      Email: "emilyjohnson@example.com",
-      Contact: "987-321-6540",
-      Address: "456 Birch St, City, Country",
-    },
-    {
-      Name: "David Wilson",
-      Email: "davidwilson@example.com",
-      Contact: "123-987-4560",
-      Address: "789 Pine St, City, Country",
-    },
-    {
-      Name: "Olivia Martin",
-      Email: "oliviamartin@example.com",
-      Contact: "321-789-6540",
-      Address: "890 Cedar St, City, Country",
-    },
-    {
-      Name: "Daniel Thompson",
-      Email: "danielthompson@example.com",
-      Contact: "654-321-9870",
-      Address: "567 Maple St, City, Country",
-    },
-  ];
+
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
+  const [customers, setCustomers] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_SERVER_URL}/customer/get/business/${
+          business._id
+        }`
+      )
+      .then((res) => {
+        setCustomers(res.data);
+      });
+  });
+
+  const deleteCustomer = (id) => {
+    
+    if (!confirm("Are you sure you want to delete?")) {
+      return;
+    }
+
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/customer/delete/${id}`)
+      .then((res) => {})
+      .catch(() => {});
+  };
 
   return (
     <>
@@ -86,8 +54,8 @@ const CustomerManagement = () => {
               )}
             </div>
           </div>
-          {sampleData && sampleData.length > 0 ? (
-            sampleData.map((item, index) => (
+          {customers && customers.length > 0 ? (
+            customers.map((item, index) => (
               <div
                 key={index}
                 className={`table-row-group ${
@@ -95,16 +63,16 @@ const CustomerManagement = () => {
                 }`}
               >
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Name}
+                  {item.name}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Email}
+                  {item.email}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Contact}
+                  {item.phone}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Address}
+                  {item.address}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
                   <button
@@ -115,7 +83,12 @@ const CustomerManagement = () => {
                   >
                     Update
                   </button>
-                  <button className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]">
+                  <button
+                    className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]"
+                    onClick={() => {
+                      deleteCustomer(item._id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>

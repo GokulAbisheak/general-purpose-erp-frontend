@@ -1,6 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddCustomer = () => {
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const customer = {
+      business: business._id,
+      name: name,
+      email: email,
+      phone: contact,
+      address: address,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/customer/add`, customer)
+      .then((res) => {
+        navigate("/customer");
+      })
+      .catch((error) => {});
+  };
+
   return (
     <>
       <div className="flex w-full h-full justify-center items-center">
@@ -10,27 +41,39 @@ const AddCustomer = () => {
               <div className="justify-center text-center items-center text-purple-700 font-bold text-2xl mb-[20px]">
                 Add Customer
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-[10px]">
                   <input
                     type="text"
                     placeholder="Name"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Email"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Contact Number"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
                   ></input>
                   <input
                     type="text"
                     placeholder="Address"
                     className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
                   ></input>
                   <button
                     type="submit"

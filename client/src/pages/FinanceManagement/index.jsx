@@ -1,73 +1,45 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const FinanceManagement = () => {
   const navigate = useNavigate();
   const headerContent = ["Transaction ID", "Amount", "Type", "Date", ""];
-  const sampleData = [
-    {
-      TransactionID: 1,
-      Amount: 100,
-      Type: "outgoing",
-      Date: "2022-01-01",
-    },
-    {
-      TransactionID: 2,
-      Amount: 50,
-      Type: "incoming",
-      Date: "2022-02-02",
-    },
-    {
-      TransactionID: 3,
-      Amount: 75,
-      Type: "outgoing",
-      Date: "2022-03-03",
-    },
-    {
-      TransactionID: 4,
-      Amount: 200,
-      Type: "incoming",
-      Date: "2022-04-04",
-    },
-    {
-      TransactionID: 5,
-      Amount: 150,
-      Type: "outgoing",
-      Date: "2022-05-05",
-    },
-    {
-      TransactionID: 6,
-      Amount: 80,
-      Type: "incoming",
-      Date: "2022-06-06",
-    },
-    {
-      TransactionID: 7,
-      Amount: 120,
-      Type: "outgoing",
-      Date: "2022-07-07",
-    },
-    {
-      TransactionID: 8,
-      Amount: 250,
-      Type: "incoming",
-      Date: "2022-08-08",
-    },
-    {
-      TransactionID: 9,
-      Amount: 90,
-      Type: "outgoing",
-      Date: "2022-09-09",
-    },
-    {
-      TransactionID: 10,
-      Amount: 300,
-      Type: "incoming",
-      Date: "2022-10-10",
-    },
-  ];
+
+  const [business, setBusiness] = useState(
+    JSON.parse(localStorage.getItem("loggedBusiness"))
+  );
+
+  const [finances, setFinances] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_SERVER_URL}/finance/get/business/${
+          business._id
+        }`
+      )
+      .then((res) => {
+        setFinances(res.data);
+      });
+  });
+
+  const formatDate = (date) => {
+    return date.substring(0, 10);
+  };
+
+  const deleteFinance = (id) => {
+    if (!confirm("Are you sure you want to delete?")) {
+      return;
+    }
+
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/finance/delete/${id}`)
+      .then((res) => {})
+      .catch(() => {});
+  };
 
   return (
     <>
@@ -86,8 +58,8 @@ const FinanceManagement = () => {
               )}
             </div>
           </div>
-          {sampleData && sampleData.length > 0 ? (
-            sampleData.map((item, index) => (
+          {finances && finances.length > 0 ? (
+            finances.map((item, index) => (
               <div
                 key={index}
                 className={`table-row-group ${
@@ -95,20 +67,20 @@ const FinanceManagement = () => {
                 }`}
               >
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.TransactionID}
+                  {item.transactionId}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Amount}
+                  {item.amount}
                 </div>
                 <div
                   className={`table-cell py-[10px] px-[20px] font-semibold ${
-                    item.Type === "incoming" ? "text-green-700" : "text-red-700"
+                    item.type === "incoming" ? "text-green-700" : "text-red-700"
                   }`}
                 >
-                  {item.Type}
+                  {item.type}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
-                  {item.Date}
+                  {formatDate(item.date)}
                 </div>
                 <div className="table-cell py-[10px] px-[20px]">
                   <button
@@ -119,7 +91,12 @@ const FinanceManagement = () => {
                   >
                     Update
                   </button>
-                  <button className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]">
+                  <button
+                    className="p-[5px] font-semibold uppercase text-white bg-red-700 hover:bg-red-800 rounded text-sm mx-[10px]"
+                    onClick={() => {
+                      deleteFinance(item._id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>

@@ -58,6 +58,7 @@ const AdminHeader = ({ isMobileOpen, setIsMobileOpen }) => {
           {dropdownLinks && dropdownLinks.length > 0 ? (
             dropdownLinks.map((item) => (
               <button
+              key={item.link}
                 className="text-left p-[10px] hover:bg-[#f2f2f2] border-b-2"
                 onClick={() => {
                   navigate(item.link);

@@ -44,7 +44,7 @@ const Header = () => {
 
     return (
         <>
-            <div className='w-full h-[64px] bg-purple-700 px-[20px] flex justify-between text-white items-center'>
+            <div className='w-full h-[64px] bg-purple-700 px-[20px] flex justify-between text-white items-center fixed top-0 shadow-[0_0_10px_rgba(0,0,0,0.5)]'>
                 <div>
                     <Link className='text-2xl font-bold' to='/'>General ERP</Link>
                 </div>
@@ -70,7 +70,7 @@ const Header = () => {
                     </button>
                 </div>  
             </div>
-            <div className={`grid bg-purple-100 text-black text-center ${isOpen ? 'grid' : 'hidden'} md:hidden`}>
+            <div className={`grid bg-purple-100 text-black text-center fixed top-[64px] w-full bg-opacity-70 ${isOpen ? 'grid' : 'hidden'} md:hidden`}>
                     {navigation && navigation.length > 0 ? navigation.map((item) => (
                         <Link className={`text-md font-medium hover:text-white hover:bg-purple-900 py-[10px] duration-200 ${location == item.link ? 'text-purple-950' : ''}`} key={item.link} to={item.link}> {item.text} </Link>
                     )):(
