@@ -46,7 +46,7 @@ const FinanceManagement = () => {
       <div className="w-full overflow-scroll">
         <div className="table table-fixed w-full min-w-[1200px]">
           <div className="table-header-group">
-            <div className="table-row bg-purple-700 text-white font-semibold">
+            <div className="table-row bg-neutral-800 text-white font-semibold">
               {headerContent && headerContent.length > 0 ? (
                 headerContent.map((item) => (
                   <div key={item} className="table-cell py-[10px] px-[20px]">
@@ -63,7 +63,7 @@ const FinanceManagement = () => {
               <div
                 key={index}
                 className={`table-row-group ${
-                  index % 2 === 0 ? "bg-purple-100" : "bg-purple-200"
+                  index % 2 === 0 ? "bg-neutral-300" : "bg-neutral-100"
                 }`}
               >
                 <div className="table-cell py-[10px] px-[20px]">
@@ -108,7 +108,7 @@ const FinanceManagement = () => {
         </div>
       </div>
       <Link to="add">
-        <div className="h-[50px] w-[50px] rounded-full bg-purple-700 absolute right-[20px] bottom-[20px] shadow-lg hover:bg-purple-900 flex justify-center items-center cursor-pointer">
+        <div className="h-[50px] w-[50px] rounded-full bg-neutral-800 absolute right-[20px] bottom-[20px] shadow-lg hover:bg-neutral-700 flex justify-center items-center cursor-pointer">
           <FontAwesomeIcon
             className="text-2xl text-white font-bold"
             icon={faPlus}

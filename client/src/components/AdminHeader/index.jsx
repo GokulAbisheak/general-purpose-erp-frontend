@@ -30,7 +30,7 @@ const AdminHeader = ({ isMobileOpen, setIsMobileOpen }) => {
     <>
       <div className="flex items-center justify-end w-full h-[64px] sticky top-0 shadow-xl px-[20px] relative bg-white">
         <div
-          className={`absolute left-[20px] md:hidden flex items-center text-2xl font-bold text-purple-800`}
+          className={`absolute left-[20px] md:hidden flex items-center text-2xl font-bold text-neutral-950`}
         >
           <button
             onClick={() => {

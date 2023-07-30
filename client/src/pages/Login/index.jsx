@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import LoginImage from "../../assets/login_image.png";
+import LoginImage from "../../assets/login-image.png";
 import axios from "axios";
 
 const Login = () => {
@@ -37,12 +37,12 @@ const Login = () => {
     <>
       <div className="flex min-h-screen justify-center items-center">
         <div className="flex shadow-none md:shadow-[0_0_10px_rgba(0,0,0,0.5)] h-[400px] md:h-[500px]">
-          <div className="bg-purple-700 w-[300px] h-full hidden md:block relative p-[15px]">
+          <div className="bg-neutral-800 w-[300px] h-full hidden md:block relative p-[15px]">
             <img className="absolute bottom-[20px] w-[90%]" src={LoginImage} />
           </div>
           <div className="w-[400px] h-full flex items-center justify-center">
             <div className="justify-center items-center w-full px-[50px]">
-              <div className="justify-center text-center items-center text-purple-700 font-bold text-2xl mb-[20px]">
+              <div className="justify-center text-center items-center text-neutral-800 font-bold text-2xl mb-[20px]">
                 General ERP
               </div>
               <form onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="Email"
-                    className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    className="px-[10px] h-[40px] border-[2px] border-neutral-800 rounded w-full outline-0"
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
@@ -58,7 +58,7 @@ const Login = () => {
                   <input
                     type="password"
                     placeholder="Password"
-                    className="px-[10px] h-[40px] border-[2px] border-purple-700 rounded w-full outline-0"
+                    className="px-[10px] h-[40px] border-[2px] border-neutral-800 rounded w-full outline-0"
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
@@ -72,7 +72,7 @@ const Login = () => {
                   )}
                   <button
                     type="submit"
-                    className="bg-purple-700 h-[40px] text-white mt-[10px] mb-[10px] rounded uppercase text-sm font-semibold w-full hover:bg-purple-900"
+                    className="bg-neutral-800 h-[40px] text-white mt-[10px] mb-[10px] rounded uppercase text-sm font-semibold w-full hover:bg-neutral-700"
                   >
                     Login
                   </button>
@@ -81,13 +81,13 @@ const Login = () => {
               <div className="grid">
                 <Link
                   to="/forgot"
-                  className="text-purple-700 text-sm hover:text-purple-900"
+                  className="text-neutral-800 text-sm hover:text-neutral-700"
                 >
                   Forgot password?
                 </Link>
                 <Link
                   to="/signup"
-                  className="text-purple-700 text-sm hover:text-purple-900"
+                  className="text-neutral-800 text-sm hover:text-neutral-700"
                 >
                   Don't have an account?
                 </Link>

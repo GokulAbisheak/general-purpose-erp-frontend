@@ -60,7 +60,7 @@ const Footer = () => {
                 <Link
                   key={item.link}
                   to={item.link}
-                  className="hover:text-purple-950"
+                  className="hover:text-cyan-500"
                 >
                   {item.text}
                 </Link>
@@ -78,7 +78,7 @@ const Footer = () => {
                 <Link
                   key={item.link}
                   to={item.link}
-                  className="hover:text-purple-950"
+                  className="hover:text-cyan-500"
                 >
                   {item.text}
                 </Link>
