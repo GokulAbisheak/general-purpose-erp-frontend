@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import navigation from "../../data/NavigationData.json";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,28 +11,6 @@ const Header = () => {
   const [business, setBusiness] = useState(
     JSON.parse(localStorage.getItem("loggedBusiness"))
   );
-
-  const navigation = [
-    {
-      text: "Home",
-      link: "/",
-    },
-
-    {
-      text: "About Us",
-      link: "/about",
-    },
-
-    {
-      text: "Contact Us",
-      link: "/contact",
-    },
-
-    {
-      text: "Services",
-      link: "/services",
-    },
-  ];
 
   const authNavigation = [
     {
@@ -52,15 +31,15 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-full h-[64px] bg-purple-700 px-[20px] flex justify-between text-white items-center fixed top-0 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+      <div className="w-full h-[64px] bg-purple-700 px-[20px] flex justify-between text-white items-center fixed top-0 shadow-[0_0_10px_rgba(0,0,0,0.5)] z-10">
         <div>
           <Link className="text-2xl font-bold" to="/">
             General ERP
           </Link>
         </div>
         <div className="grid grid-flow-col gap-[20px] hidden md:grid">
-          {navigation && navigation.length > 0 ? (
-            navigation.map((item) => (
+          {navigation && navigation.data.length > 0 ? (
+            navigation.data.map((item) => (
               <Link
                 className={`text-md font-medium hover:text-purple-950 ${
                   location == item.link ? "text-purple-950" : ""

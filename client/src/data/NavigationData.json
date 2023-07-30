@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "text": "Home",
+      "link": "/"
+    },
+
+    {
+      "text": "About Us",
+      "link": "/about"
+    },
+
+    {
+      "text": "Contact Us",
+      "link": "/contact"
+    },
+
+    {
+      "text": "Services",
+      "link": "/services"
+    }
+  ]
+}
