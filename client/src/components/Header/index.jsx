@@ -98,8 +98,8 @@ const Header = () => {
           isOpen ? "grid" : "hidden"
         } md:hidden`}
       >
-        {navigation && navigation.length > 0 ? (
-          navigation.map((item) => (
+        {navigation && navigation.data.length > 0 ? (
+          navigation.data.map((item) => (
             <Link
               className={`text-md font-medium hover:text-white hover:bg-neutral-700 py-[10px] duration-200 ${
                 location == item.link ? "text-cyan-500" : ""
