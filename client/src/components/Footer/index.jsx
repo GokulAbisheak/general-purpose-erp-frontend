@@ -51,8 +51,8 @@ const Footer = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 bg-purple-700 w-full py-[80px] px-[50px] text-white">
-        <div className="flex flex-col gap-[20px]">
+      <div className="flex flex-wrap bg-neutral-800 w-full py-[60px] px-[30px] text-white">
+        <div className="flex w-1/2 lg:w-1/3 flex-col gap-[20px] px-[20px] py-[20px]">
           <div className="text-xl font-semibold">Quick Links</div>
           <div className="flex flex-col gap-[10px]">
             {navigation && navigation.data.length > 0 ? (
@@ -70,7 +70,7 @@ const Footer = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-[20px]">
+        <div className="flex w-1/2 lg:w-1/3 flex-col gap-[20px] px-[20px] py-[20px]">
           <div className="text-xl font-semibold">Services</div>
           <div className="flex flex-col gap-[10px]">
             {services && services.length > 0 ? (
@@ -88,7 +88,7 @@ const Footer = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-[20px]">
+        <div className="flex w-full lg:w-1/3 flex-col gap-[20px] px-[20px] py-[20px]">
           <div className="text-xl font-semibold">Keep in touch</div>
           <div className="flex flex-col gap-[10px]">
             <div>
@@ -115,7 +115,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="py-[20px] flex text-center justify-center items-center bg-purple-800 text-white">
+      <div className="py-[20px] flex text-center justify-center items-center bg-neutral-700 text-white">
         Made with Love <FontAwesomeIcon className="ml-[10px] text-red-600 text-xl" icon={faHeart} />
       </div>
     </>
