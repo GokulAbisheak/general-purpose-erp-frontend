@@ -7,6 +7,7 @@ import {
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   const services = [
@@ -56,7 +57,11 @@ const Footer = () => {
           <div className="flex flex-col gap-[10px]">
             {navigation && navigation.data.length > 0 ? (
               navigation.data.map((item) => (
-                <Link key={item.link} to={item.link} className="hover:text-purple-950">
+                <Link
+                  key={item.link}
+                  to={item.link}
+                  className="hover:text-purple-950"
+                >
                   {item.text}
                 </Link>
               ))
@@ -69,7 +74,15 @@ const Footer = () => {
           <div className="text-xl font-semibold">Services</div>
           <div className="flex flex-col gap-[10px]">
             {services && services.length > 0 ? (
-              services.map((item) => <Link key={item.link} to={item.link} className="hover:text-purple-950">{item.text}</Link>)
+              services.map((item) => (
+                <Link
+                  key={item.link}
+                  to={item.link}
+                  className="hover:text-purple-950"
+                >
+                  {item.text}
+                </Link>
+              ))
             ) : (
               <></>
             )}
@@ -85,7 +98,13 @@ const Footer = () => {
             <div className="flex gap-[15px]">
               {socials && socials.length > 0 ? (
                 socials.map((item) => (
-                  <Link key={item.link} to={item.link} target="_blank" rel="noopener noreferrer" className="hover:scale-125 transition ease-in-out">
+                  <Link
+                    key={item.link}
+                    to={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:scale-125 transition ease-in-out"
+                  >
                     <FontAwesomeIcon className="text-3xl" icon={item.icon} />
                   </Link>
                 ))
@@ -95,6 +114,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="py-[20px] flex text-center justify-center items-center bg-purple-800 text-white">
+        Made with Love <FontAwesomeIcon className="ml-[10px] text-red-600 text-xl" icon={faHeart} />
       </div>
     </>
   );
