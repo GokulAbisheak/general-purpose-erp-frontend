@@ -54,7 +54,7 @@ const SideNav = (isMobileOpen) => {
 
   return (
     <>
-      <div className={`min-w-[200px] h-screen overflow-scroll bg-[rgba(126,34,206,0.7)] md:bg-gradient-to-t from-purple-700 to-purple-900 absolute md:sticky top-0 left-0 ${isMobileOpen.state ? 'block' : 'hidden'} md:block`}>
+      <div className={`min-w-[200px] h-screen overflow-scroll bg-[rgba(126,34,206,0.7)] md:bg-gradient-to-t from-neutral-800 to-neutral-700 absolute md:sticky top-0 left-0 ${isMobileOpen.state ? 'block' : 'hidden'} md:block`}>
         <div className="h-[64px] w-full flex justify-center text-center items-center text-white font-bold">
           <Link className="text-2xl hidden md:block" to="/dashboard">
             General ERP

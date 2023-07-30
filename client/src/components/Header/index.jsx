@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-full h-[64px] bg-purple-700 px-[20px] flex justify-between text-white items-center fixed top-0 shadow-[0_0_10px_rgba(0,0,0,0.5)] z-10">
+      <div className="w-full h-[64px] bg-neutral-800 px-[20px] flex justify-between text-white items-center fixed top-0 shadow-[0_0_10px_rgba(0,0,0,0.5)] z-10">
         <div>
           <Link className="text-2xl font-bold" to="/">
             General ERP
@@ -41,8 +41,8 @@ const Header = () => {
           {navigation && navigation.data.length > 0 ? (
             navigation.data.map((item) => (
               <Link
-                className={`text-md font-medium hover:text-purple-950 ${
-                  location == item.link ? "text-purple-950" : ""
+                className={`text-md font-medium hover:text-cyan-500 ${
+                  location == item.link ? "text-cyan-500" : ""
                 }`}
                 key={item.link}
                 to={item.link}
@@ -66,8 +66,8 @@ const Header = () => {
                   (item.text == "Login" || item.text == "Sign up")
                     ? "hidden"
                     : ""
-                } text-md font-medium hover:text-purple-950 ${
-                  location === item.link ? "text-purple-950" : ""
+                } text-md font-medium hover:text-cyan-500 ${
+                  location === item.link ? "text-cyan-500" : ""
                 }`}
                 key={item.link}
                 to={item.link}
@@ -87,22 +87,22 @@ const Header = () => {
             }}
           >
             <FontAwesomeIcon
-              className="text-2xl hover:text-purple-900 cursor-pointer"
+              className="text-2xl hover:text-neutral-700 cursor-pointer"
               icon={faBars}
             />
           </button>
         </div>
       </div>
       <div
-        className={`grid bg-purple-100 text-black text-center fixed top-[64px] w-full bg-opacity-70 ${
+        className={`grid bg-neutral-300 text-black text-center fixed top-[64px] w-full bg-opacity-70 ${
           isOpen ? "grid" : "hidden"
         } md:hidden`}
       >
         {navigation && navigation.length > 0 ? (
           navigation.map((item) => (
             <Link
-              className={`text-md font-medium hover:text-white hover:bg-purple-900 py-[10px] duration-200 ${
-                location == item.link ? "text-purple-950" : ""
+              className={`text-md font-medium hover:text-white hover:bg-neutral-700 py-[10px] duration-200 ${
+                location == item.link ? "text-cyan-500" : ""
               }`}
               key={item.link}
               to={item.link}
@@ -125,8 +125,8 @@ const Header = () => {
                 (item.text == "Login" || item.text == "Sign up")
                   ? "hidden"
                   : ""
-              } text-md font-medium hover:text-white hover:bg-purple-900 py-[10px] duration-200 ${
-                location === item.link ? "text-purple-950 " : " "
+              } text-md font-medium hover:text-white hover:bg-neutral-700 py-[10px] duration-200 ${
+                location === item.link ? "text-cyan-500 " : " "
               }`}
               key={item.link}
               to={item.link}

@@ -51,7 +51,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 bg-purple-700 w-full py-[80px] px-[50px] text-white">
+      <div className="grid grid-cols-3 bg-neutral-800 w-full py-[80px] px-[50px] text-white">
         <div className="flex flex-col gap-[20px]">
           <div className="text-xl font-semibold">Quick Links</div>
           <div className="flex flex-col gap-[10px]">
@@ -60,7 +60,7 @@ const Footer = () => {
                 <Link
                   key={item.link}
                   to={item.link}
-                  className="hover:text-purple-950"
+                  className="hover:text-cyan-500"
                 >
                   {item.text}
                 </Link>
@@ -78,7 +78,7 @@ const Footer = () => {
                 <Link
                   key={item.link}
                   to={item.link}
-                  className="hover:text-purple-950"
+                  className="hover:text-cyan-500"
                 >
                   {item.text}
                 </Link>
@@ -115,7 +115,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="py-[20px] flex text-center justify-center items-center bg-purple-800 text-white">
+      <div className="py-[20px] flex text-center justify-center items-center bg-neutral-950 text-white">
         Made with Love <FontAwesomeIcon className="ml-[10px] text-red-600 text-xl" icon={faHeart} />
       </div>
     </>
